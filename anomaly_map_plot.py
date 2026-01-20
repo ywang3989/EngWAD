@@ -2,18 +2,18 @@ from utlis import *
 from models import *
 
 # Hyperparameters
-date = '0710_A_4_10_7'
-OOD_sample = '_OOD_11_17'
+testing_sample = '4_10_7'
+OOD_sample = '11_17'
 feat_selection = 'b' # 'h' or 'z' or 'b'
 wasser_pattern = 'avg'
 
-parts = date.split('_')
-nums = [int(x) for x in parts[2:]]
-OOD_parts = OOD_sample.split('_')
-OOD_nums = [int(x) for x in OOD_parts[2:]]
-file_path = os.getcwd()
-file_path = file_path.replace('Codes', 'UT Results')
-file_path_suffix = 'TransAE_' + wasser_pattern + '_' + str(nums[0]) + '_' + str(nums[1]) + '_'+ str(nums[2]) + OOD_sample
+# parts = date.split('_')
+# nums = [int(x) for x in parts[2:]]
+# OOD_parts = OOD_sample.split('_')
+# OOD_nums = [int(x) for x in OOD_parts[2:]]
+# file_path = os.getcwd()
+# file_path = file_path.replace('Codes', 'UT Results')
+# file_path_suffix = 'TransAE_' + wasser_pattern + '_' + str(nums[0]) + '_' + str(nums[1]) + '_'+ str(nums[2]) + OOD_sample
 
 # Cropping information
 # 0710_A:   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19
@@ -45,9 +45,9 @@ value_max = np.exp(1)
 image_ratio = 1
 plt.style.use('classic')
 for i, model_selection in enumerate(model_selections):
-    file_path_ = os.path.join(file_path, model_selection + '\\' + file_path_suffix)
-    file_name = f'anomaly_score_TransAE_{wasser_pattern}_{date}_{feat_selection}.csv'
-    full_path = os.path.join(file_path_, file_name)
+    file_name = f'anomaly_score_TransAE_{wasser_pattern}_0710_A_{testing_sample}_{feat_selection}.csv'
+    file_path = f'results_file\\{model_selection}\\TransAE_{wasser_pattern}_{testing_sample}_OOD_{OOD_sample}\\'
+    full_path = os.path.join(file_path, file_name)
     anomaly_scores = np.genfromtxt(full_path, delimiter=',').astype('f4')
 
     # Get current model threshold
